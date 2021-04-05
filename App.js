@@ -9,6 +9,7 @@ export default function App() {
       <Text>Zain's line</Text>
       <Text>Si Woo's line</Text>
       <Text> Ikenna's line</Text>
+      <Text>Darryl's line</Text>
       <StatusBar style="auto" />
     </View>
   );

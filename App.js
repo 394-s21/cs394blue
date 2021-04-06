@@ -1,18 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollableList, TextInput, Button } from 'react-native';
+import {Weather, Exercise, Wake} from './questions/Questions';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
+const Stack = createStackNavigator();
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <Text>Life Capsule</Text>
-            <Text>Zain's line</Text>
-            <Text>Si Woo's line</Text>
-            <Text> Ikenna's line</Text>
-            <Text>Darryl's line</Text>
-            <Text>Melia's line</Text>
-            <StatusBar style="auto" />
-        </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Weather"
+          component={Weather}/>
+          <Stack.Screen name="Exercise"
+          component={Exercise}/>
+          <Stack.Screen name="Wake"
+          component={Wake} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
 }
 

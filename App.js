@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ScrollableList, TextInput, Button } from 'react-native';
 import { Weather, DayRating, Exercise, Wake } from './questions/Questions';
+import { DayRatingChart } from './charts/Charts';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -21,6 +22,8 @@ export default function App() {
           component={Exercise}/>
           <Stack.Screen name="Wake"
           component={Wake} />
+          <Stack.Screen name="Charts"
+          component={DayRatingChart} />
         </Stack.Navigator>
       </NavigationContainer>
     );

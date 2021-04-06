@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, ScrollableList, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion'
 import SliderQuestion from './components/SliderQuestion'
 
@@ -42,7 +42,7 @@ export function Wake({navigation}) {
             question="What time did you wake up today?"
             options={["5:00 - 6:30 AM", "6:30 - 8:00 AM", "8:00 - 9:30 AM",
                 "9:30 - 11:00 AM", "11:00 - 12:30 PM", "After 12:30 PM"]}
-            next={(str) => navigation.navigate('Wake')}
+            next={(str) => navigation.navigate('Charts')}
         />
     )
 }

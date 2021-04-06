@@ -1,43 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ScrollableList, TextInput, Button } from 'react-native';
+import ButtonQuestion from './components/ButtonQuestion'
+import SliderQuestion from './components/SliderQuestion'
 
 export function Weather({navigation}) {
     return (
-        <View style={styles.container}>
-            <Text>How was the weather today?</Text>
-            <Button title="Sunny" onPress={() => navigation.navigate('Exercise')}></Button>
-            <Button title="Cloudy" onPress={() => navigation.navigate('Exercise')}></Button>
-            <Button title="Rainy" onPress={() => navigation.navigate('Exercise')}></Button>
-            <Button title="Snow" onPress={() => navigation.navigate('Exercise')}></Button>
-            <Button title="Don't Know cause I never Left the House" 
-            onPress={() => navigation.navigate('Exercise')}></Button>
+        <ButtonQuestion
+            question="How was the weather today?"
+            options={["Sunny", "Cloudy", "Rainy", "Snow", "Don't know because I never left the house"]}
+            next={(str) => navigation.navigate('DayRating')}
+        />
+    )
+}
 
-        </View>
+export function DayRating({navigation}) {
+    return (
+        <SliderQuestion
+            question="How was your day today?"
+            min={0}
+            max={10}
+            step={1}
+            next={(str) => navigation.navigate('Exercise')}
+        />
     )
 }
 
 export function Exercise({navigation}) {
     return(
-        <View style={styles.container}>
-            <Text>Did you exercise today?</Text>
-              <Button title="Yes" onPress={() => navigation.navigate('Wake')}></Button>
-              <Button title="No" onPress={() => navigation.navigate('Wake')}></Button>
-        </View>
+        <ButtonQuestion
+            question="Did you exercise today?"
+            options={["Yes", "No"]}
+            next={(str) => navigation.navigate('Wake')}
+        />
     )
 }
 
-export function Wake() {
+export function Wake({navigation}) {
     return (
-        <View style={styles.container}>
-            <Text>What time did you wake up today?</Text>
-            <Button title="5-6:30AM"></Button>
-            <Button title="6:30-8AM"></Button>
-            <Button title="8-9:30AM"></Button>
-            <Button title="8-9:30AM"></Button>
-            <Button title="11AM-12PM"></Button>
-            <Button title="After 12PM"></Button>
-        </View>  
+        <ButtonQuestion
+            question="What time did you wake up today?"
+            options={["5:00 - 6:30 AM", "6:30 - 8:00 AM", "8:00 - 9:30 AM",
+                "9:30 - 11:00 AM", "11:00 - 12:30 PM", "After 12:30 PM"]}
+            next={(str) => navigation.navigate('Wake')}
+        />
     )
 }
 

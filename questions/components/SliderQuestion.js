@@ -1,18 +1,26 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function SliderQuestion(props) {
     return (
         <View style={styles.container}>
-            <Text>{props.question}</Text>
+            <View style={{paddingBottom: 20}}>
+                <Text style={styles.topText}>{props.question}</Text>
+            </View>
             <Slider
-                style={{width: 250, height: 40}}
+                style={{width: 350, height: 40}}
                 minimumValue={props.min}
                 maximumValue={props.max}
                 step={props.step}
             />
-            <Button title="Submit" onPress={props.next}></Button>
+            <View style={{paddingTop: 20}}>
+                <TouchableOpacity style={styles.button} onPress={props.next}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
+            </View>
+            
         </View>
     )
 }
@@ -20,8 +28,29 @@ export default function SliderQuestion(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#0099cc',
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    button: {
+        borderColor: '#ffffff',
+        alignItems: 'center',
+        borderRadius: 12,
+        borderWidth: 6,
+        backgroundColor: '#ffffff'
+    },
+
+    topText: {
+        fontSize: 32,
+        textAlign: 'center',
+        paddingBottom: 20,
+        fontFamily: 'Futura-CondensedExtraBold'
+    },
+
+    buttonText: {
+        fontSize: 35,
+        textAlign: 'center',
+        fontFamily: 'Futura'
+    }
 });

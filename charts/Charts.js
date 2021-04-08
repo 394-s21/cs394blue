@@ -1,15 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView } from 'react-native'
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
-export function Charts() {
+export function Charts({navigation}) {
   return (
-    <ScrollView style={styles.scrollview}>
-      <Text style={styles.topText}>Charts</Text>
-      {DayRatingChart()}
-      {WeatherChart()}
-      {StreakChart()}
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView style={styles.scrollview}>
+        <Text style={styles.topText}>Charts</Text>
+        {DayRatingChart()}
+        {WeatherChart()}
+        {StreakChart()}
+        <TouchableOpacity onPress={()=>navigation.navigate(name='Weather',component={Weather})} 
+                          style={styles.button}>
+          <Text style={styles.buttonText}>Log Today</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -147,5 +155,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     fontFamily: 'Futura'
+  },
+  button: {
+    borderColor: '#ffffff',
+    alignItems: 'center',
+    borderRadius: 12,
+    borderWidth: 6,
+    backgroundColor: '#ffffff'
   }
 });

@@ -5,7 +5,7 @@ import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
 export function Charts() {
   return (
     <ScrollView style={styles.scrollview}>
-      <Text>Charts</Text>
+      <Text style={styles.topText}>Charts</Text>
       {DayRatingChart()}
       {WeatherChart()}
       {StreakChart()}
@@ -16,7 +16,7 @@ export function Charts() {
 function DayRatingChart() {
   return (
     <View style={styles.container}>
-      <Text>Daily Ratings</Text>
+      <Text style={styles.buttonText}>Daily Ratings</Text>
       <LineChart
         data={{
           labels: ["S", "M", "T", "W", "Th", "F", "S"],
@@ -40,8 +40,10 @@ function DayRatingChart() {
         width={Dimensions.get("window").width}
         height={250}
         chartConfig={{
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientToOpacity: 0,
           decimalPlaces: 0,
-          color: () => 'rgba(26, 255, 146, 1)',
+          color: () => '#ffffff',
         }}
       />
     </View>
@@ -51,7 +53,7 @@ function DayRatingChart() {
 function WeatherChart() {
   return (
     <View style={styles.container}>
-      <Text>How Weather Affected Your Day</Text>
+      <Text style={styles.buttonText}>How Weather Affected Your Day</Text>
       <BarChart
         data={{
           labels: ["Sunny", "Cloudy", "Rainy", "Snowy", "IDK", "Max"],
@@ -70,8 +72,10 @@ function WeatherChart() {
         width={Dimensions.get("window").width}
         height={300}
         chartConfig={{
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientToOpacity: 0,
           decimalPlaces: 0,
-          color: () => 'rgba(26, 255, 146, 1)',
+          color: () => '#ffffff',
         }}
       />
     </View>
@@ -81,13 +85,24 @@ function WeatherChart() {
 function StreakChart() {
   return (
     <View style={styles.container}>
-      <Text>Your Progress</Text>
+      <Text style={styles.buttonText}>Your Progress</Text>
       <ContributionGraph
         values={[
           // Set range values
           {date: "2000-01-01", count: 0},
           {date: "2000-01-02", count: 1},
           // TODO: Change from test data to user data
+          {date: "2021-03-02", count: 1},
+          {date: "2021-03-03", count: 1},
+          {date: "2021-03-05", count: 1},
+          {date: "2021-03-06", count: 1},
+          {date: "2021-03-07", count: 1},
+          {date: "2021-03-10", count: 1},
+          {date: "2021-03-13", count: 1},
+          {date: "2021-03-14", count: 1},
+          {date: "2021-03-15", count: 1},
+          {date: "2021-03-22", count: 1},
+          {date: "2021-03-24", count: 1},
           {date: "2021-03-30", count: 1},
           {date: "2021-03-31", count: 1},
           {date: "2021-04-02", count: 1},
@@ -101,11 +116,10 @@ function StreakChart() {
         width={Dimensions.get("window").width}
         height={200}
         chartConfig={{
-          backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientToOpacity: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: () => '#ffffff',
         }}
       />
     </View>
@@ -115,11 +129,23 @@ function StreakChart() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0099cc',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20
   },
   scrollview: {
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
+  },
+  topText: {
+    fontSize: 24,
+    textAlign: 'center',
+    paddingBottom: 20,
+    fontFamily: 'Futura-CondensedExtraBold'
+  },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    fontFamily: 'Futura'
   }
 });

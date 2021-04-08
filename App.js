@@ -14,6 +14,8 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Charts"
+          component={Charts} />
           <Stack.Screen name="Weather"
           component={Weather}/>
           <Stack.Screen name="DayRating"
@@ -22,8 +24,6 @@ export default function App() {
           component={Exercise}/>
           <Stack.Screen name="Wake"
           component={Wake} />
-          <Stack.Screen name="Charts"
-          component={Charts} />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -12,10 +12,6 @@ export function Charts({navigation}) {
         {DayRatingChart()}
         {WeatherChart()}
         {StreakChart()}
-        <TouchableOpacity onPress={()=>navigation.navigate(name='Weather',component={Weather})} 
-                          style={styles.button}>
-          <Text style={styles.buttonText}>Log Today</Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )

@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         paddingBottom: 20,
-        fontFamily: 'Futura-CondensedExtraBold'
+        // fontFamily: 'Futura-CondensedExtraBold'
     },
 
     buttonText: {
         fontSize: 18,
         textAlign: 'center',
-        fontFamily: 'Futura'
+        // fontFamily: 'Futura'
     }
 });

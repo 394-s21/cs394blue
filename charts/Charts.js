@@ -12,6 +12,9 @@ export function Charts({navigation}) {
         {DayRatingChart()}
         {WeatherChart()}
         {StreakChart()}
+        <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
+                <Text style={styles.buttonText}>Return to Home</Text>
+            </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -153,7 +156,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Futura'
   },
   button: {
-    borderColor: '#ffffff',
+    borderColor: '#0099cc',
     alignItems: 'center',
     borderRadius: 12,
     borderWidth: 6,

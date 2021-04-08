@@ -1,8 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
+
+export function LogStart({navigation}) {
+    return (
+        <TouchableOpacity onPress={()=>navigation.navigate('Weather')} style={styles.button}>
+            <Text style={styles.buttonText}>Log Today</Text>
+        </TouchableOpacity>
+    )
+}
 
 export function Weather({navigation}) {
     return (
@@ -54,4 +62,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    button: {
+        borderColor: '#ffffff',
+        alignItems: 'center',
+        borderRadius: 12,
+        borderWidth: 6,
+        backgroundColor: '#ffffff'
+    },
+    buttonText: {
+        fontSize: 18,
+        textAlign: 'center',
+        fontFamily: 'Futura'
+    }
 });

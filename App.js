@@ -14,6 +14,8 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="LogStart"
+          component={LogStart}/>
           <Stack.Screen name="Weather"
           component={Weather}/>
           <Stack.Screen name="Exercise"

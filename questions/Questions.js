@@ -6,9 +6,15 @@ import SliderQuestion from './components/SliderQuestion';
 
 export function LogStart({navigation}) {
     return (
-        <TouchableOpacity onPress={()=>navigation.navigate('Weather')} style={styles.button}>
-            <Text style={styles.buttonText}>Log Today</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Weather')} style={styles.button}>
+                <Text style={styles.buttonText}>Log Today</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Charts')} style={styles.button}>
+                <Text style={styles.buttonText}>Charts</Text>
+            </TouchableOpacity>
+        </View>
+
     )
 }
 
@@ -58,7 +64,7 @@ export function DayRating({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#0099cc',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -66,11 +72,12 @@ const styles = StyleSheet.create({
         borderColor: '#ffffff',
         alignItems: 'center',
         borderRadius: 12,
-        borderWidth: 6,
-        backgroundColor: '#ffffff'
+        borderWidth: 10,
+        backgroundColor: '#ffffff',
+        margin: 20,
     },
     buttonText: {
-        fontSize: 18,
+        fontSize: 30,
         textAlign: 'center',
         fontFamily: 'Futura'
     }

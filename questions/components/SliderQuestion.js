@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function SliderQuestion(props) {
     return (

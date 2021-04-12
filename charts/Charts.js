@@ -1,27 +1,47 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
 import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
-const data = require("../data.json")
+import { firebase } from '../fire';
 
 export function Charts({navigation}) {
+  
+  // Make input later
+  var name = "entries";
+  const [entry, setEntry] = useState([]);
+
+  useEffect(() => {
+    const db = firebase.database().ref();
+    const handleData = snap => {
+      if (snap.val() && name in snap.val()) setEntry(snap.val()[name]);
+      else setEntry([]);
+    }
+    db.on('value', handleData, error => alert(error));
+    return () => { db.off('value', handleData); };
+  }, []);
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollview}>
         <Text style={styles.topText}>Charts</Text>
-        {DayRatingChart()}
-        {WeatherChart()}
-        {StreakChart()}
+        {DayRatingChart(entry)}
+        {WeatherChart(entry)}
+        {StreakChart(entry)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
             </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
+  
 }
 
-function DayRatingChart() {
+function DayRatingChart(data) {
+  if(!data.length) {
+    return;
+  }
+
   // TODO: Make number of days be an input
   const numDays = 7;
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -36,7 +56,7 @@ function DayRatingChart() {
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
     labels.push(daysOfWeek[date.getDay()])
-    let entry = data.entries.find(e => {
+    let entry = data.find(e => {
       let entryDate = new Date(e.date.replace(/-/g, '/'))
       entryDate.setHours(0, 0, 0, 0)
       date.setHours(0, 0, 0, 0)
@@ -88,7 +108,11 @@ function DayRatingChart() {
   )
 }
 
-function WeatherChart() {
+function WeatherChart(data) {
+  if(!data.length) {
+    return;
+  }
+
   // TODO: Make number of days be an input
   const numDays = 7;
   const endDate = new Date();
@@ -108,7 +132,7 @@ function WeatherChart() {
 
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
-    let entry = data.entries.find(e => {
+    let entry = data.find(e => {
       let entryDate = new Date(e.date.replace(/-/g, '/'))
       entryDate.setHours(0, 0, 0, 0)
       date.setHours(0, 0, 0, 0)
@@ -154,7 +178,12 @@ function WeatherChart() {
   )
 }
 
-function StreakChart() {
+function StreakChart(data) {
+
+  if(!data.length) {
+    return;
+  }
+
   // TODO: Make number of days be an input
   const numDays = 70;
   const endDate = new Date();
@@ -170,7 +199,7 @@ function StreakChart() {
 
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
-    let entry = data.entries.find(e => {
+    let entry = data.find(e => {
       let entryDate = new Date(e.date.replace(/-/g, '/'))
       entryDate.setHours(0, 0, 0, 0)
       date.setHours(0, 0, 0, 0)

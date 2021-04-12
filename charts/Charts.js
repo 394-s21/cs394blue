@@ -23,21 +23,46 @@ export function Charts({navigation}) {
 
 function DayRatingChart() {
   // TODO: Make number of days be an input
-  const days = 7;
+  const numDays = 7;
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  // console.log(data.entries.find(d => d.date === "2021-04-05"))
+  const endDate = new Date();
+  let startDate = new Date();
+  startDate.setDate(endDate.getDate() - numDays + 1);
 
-  console.log(data)
+  let date = startDate;
+  let labels = [];
+  let dailyRatings = [];
+
+  // Loop through entries by date and fetch data
+  for (let i = 0; i < numDays; i++) {
+    labels.push(daysOfWeek[date.getDay()])
+    let entry = data.entries.find(e => {
+      let entryDate = new Date(e.date.replace(/-/g, '/'))
+      entryDate.setHours(0, 0, 0, 0)
+      date.setHours(0, 0, 0, 0)
+      return entryDate.valueOf() === date.valueOf();
+    })
+    if (entry) {
+      dailyRatings.push(entry.dailyRating);
+    }
+    else {
+      dailyRatings.push(0);
+    }
+
+    // Increment date
+    date.setDate(date.getDate() + 1);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Daily Ratings</Text>
       <LineChart
         data={{
-          labels: [],
+          labels: labels,
           datasets: [
             {
               // TODO: Change from test data to user data
-              data: [3, 5, 8, 9, 4, 1, 3],
+              data: dailyRatings,
               strokeWidth: 1
             },
             {

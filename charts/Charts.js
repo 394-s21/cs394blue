@@ -61,7 +61,6 @@ function DayRatingChart() {
           labels: labels,
           datasets: [
             {
-              // TODO: Change from test data to user data
               data: dailyRatings,
               strokeWidth: 1
             },
@@ -90,17 +89,51 @@ function DayRatingChart() {
 }
 
 function WeatherChart() {
+  // TODO: Make number of days be an input
+  const numDays = 7;
+  const endDate = new Date();
+  let startDate = new Date();
+  startDate.setDate(endDate.getDate() - numDays + 1);
+
+  let date = startDate;
+  // Keep track of [sum, count]
+  let values = {
+    "sunny": [0, 0],
+    "cloudy": [0, 0],
+    "rainy": [0, 0],
+    "snowy": [0, 0],
+    "unknown": [0, 0],
+    "max": [10, 1]
+  }
+
+  // Loop through entries by date and fetch data
+  for (let i = 0; i < numDays; i++) {
+    let entry = data.entries.find(e => {
+      let entryDate = new Date(e.date.replace(/-/g, '/'))
+      entryDate.setHours(0, 0, 0, 0)
+      date.setHours(0, 0, 0, 0)
+      return entryDate.valueOf() === date.valueOf();
+    })
+    if (entry) {
+      values[entry.weather][0] += entry.dailyRating;
+      values[entry.weather][1] += 1;
+    }
+
+    // Increment date
+    date.setDate(date.getDate() + 1);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>How Weather Affected Your Day</Text>
       <BarChart
         data={{
-          labels: ["Sunny", "Cloudy", "Rainy", "Snowy", "IDK", "Max"],
+          labels: Object.keys(values).map(k => k.toUpperCase()),
           datasets: [
             {
               // TODO: Find workaround for setting max y value
-              // TODO: Change from test data to user data
-              data: [9, 7, 6, 3, 5, 10],
+              // If no values are recorded for the option return 0
+              data: Object.values(values).map(v => v[1] !== 0 ? v[0]/v[1] : 0)
             }
           ]
         }}
@@ -122,36 +155,42 @@ function WeatherChart() {
 }
 
 function StreakChart() {
+  // TODO: Make number of days be an input
+  const numDays = 70;
+  const endDate = new Date();
+  let startDate = new Date();
+  startDate.setDate(endDate.getDate() - numDays + 1);
+
+  let date = startDate;
+  // Set range values
+  let listDates = [
+    {date: "2000-01-01", count: 0},
+    {date: "2000-01-02", count: 1}
+  ]
+
+  // Loop through entries by date and fetch data
+  for (let i = 0; i < numDays; i++) {
+    let entry = data.entries.find(e => {
+      let entryDate = new Date(e.date.replace(/-/g, '/'))
+      entryDate.setHours(0, 0, 0, 0)
+      date.setHours(0, 0, 0, 0)
+      return entryDate.valueOf() === date.valueOf();
+    })
+    if (entry) {
+      listDates.push({date: entry.date, count: 1});
+    }
+
+    // Increment date
+    date.setDate(date.getDate() + 1);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Your Progress</Text>
       <ContributionGraph
-        values={[
-          // Set range values
-          {date: "2000-01-01", count: 0},
-          {date: "2000-01-02", count: 1},
-          // TODO: Change from test data to user data
-          {date: "2021-03-02", count: 1},
-          {date: "2021-03-03", count: 1},
-          {date: "2021-03-05", count: 1},
-          {date: "2021-03-06", count: 1},
-          {date: "2021-03-07", count: 1},
-          {date: "2021-03-10", count: 1},
-          {date: "2021-03-13", count: 1},
-          {date: "2021-03-14", count: 1},
-          {date: "2021-03-15", count: 1},
-          {date: "2021-03-22", count: 1},
-          {date: "2021-03-24", count: 1},
-          {date: "2021-03-30", count: 1},
-          {date: "2021-03-31", count: 1},
-          {date: "2021-04-02", count: 1},
-          {date: "2021-04-03", count: 1},
-          {date: "2021-04-05", count: 1},
-          {date: "2021-04-06", count: 1},
-          {date: "2021-04-07", count: 1}
-        ]}
-        endDate={new Date("2021-04-07")}
-        numDays={70}
+        values={listDates}
+        endDate={endDate}
+        numDays={numDays}
         width={Dimensions.get("window").width}
         height={200}
         chartConfig={{

@@ -9,8 +9,8 @@
         },
         {
             "date": "2021-04-01",
-            "dailyRating": 8,
-            "weather": "sunny",
+            "dailyRating": 4,
+            "weather": "cloudy",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
         },
@@ -18,7 +18,7 @@
             "date": "2021-04-02",
             "dailyRating": 8,
             "weather": "sunny",
-            "exercise": true,
+            "exercise": false,
             "wakeupTime": "8:00-9:30"
         },
         {
@@ -31,35 +31,35 @@
         {
             "date": "2021-04-05",
             "dailyRating": 8,
-            "weather": "sunny",
+            "weather": "cloudy",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
         },
         {
             "date": "2021-04-06",
-            "dailyRating": 8,
+            "dailyRating": 10,
             "weather": "sunny",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
         },
         {
             "date": "2021-04-08",
-            "dailyRating": 8,
-            "weather": "sunny",
+            "dailyRating": 3,
+            "weather": "rainy",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
         },
         {
             "date": "2021-04-09",
-            "dailyRating": 8,
+            "dailyRating": 7,
             "weather": "sunny",
-            "exercise": true,
+            "exercise": false,
             "wakeupTime": "8:00-9:30"
         },
         {
             "date": "2021-04-10",
             "dailyRating": 2,
-            "weather": "sunny",
+            "weather": "snowy",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
         },

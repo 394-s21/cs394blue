@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
 export function Charts({navigation}) {

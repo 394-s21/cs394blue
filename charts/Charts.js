@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, Touchable
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
 import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
+const data = require("../data.json")
+
 export function Charts({navigation}) {
   return (
     <SafeAreaView>
@@ -20,12 +22,18 @@ export function Charts({navigation}) {
 }
 
 function DayRatingChart() {
+  // TODO: Make number of days be an input
+  const days = 7;
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  // console.log(data.entries.find(d => d.date === "2021-04-05"))
+
+  console.log(data)
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Daily Ratings</Text>
       <LineChart
         data={{
-          labels: ["S", "M", "T", "W", "Th", "F", "S"],
+          labels: [],
           datasets: [
             {
               // TODO: Change from test data to user data

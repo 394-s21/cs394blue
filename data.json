@@ -1,0 +1,52 @@
+{
+    "entries": [
+        {
+            "date": "2021-03-31",
+            "dayOfWeek": 3,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-01",
+            "dayOfWeek": 4,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-02",
+            "dayOfWeek": 5,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-04",
+            "dayOfWeek": 0,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-05",
+            "dayOfWeek": 1,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-06",
+            "dayOfWeek": 2,
+            "dailyRating": 8,
+            "weather": "sunny",
+            "exercise": true,
+            "wakeupTime": "8:00-9:30"
+        }
+    ]
+}

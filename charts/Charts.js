@@ -128,7 +128,7 @@ function WeatherChart() {
       <Text style={styles.buttonText}>How Weather Affected Your Day</Text>
       <BarChart
         data={{
-          labels: Object.keys(values).map(k => k.toUpperCase()),
+          labels: Object.keys(values).map(k => k[0].toUpperCase() + k.substr(1)),
           datasets: [
             {
               // TODO: Find workaround for setting max y value

@@ -76,6 +76,7 @@ function DayRatingChart(data) {
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Daily Ratings</Text>
+      <Text style={styles.description}>How you rated your days for the past 7 days</Text>
       <LineChart
         data={{
           labels: labels,
@@ -149,7 +150,8 @@ function WeatherChart(data) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.buttonText}>How Weather Affected Your Day</Text>
+      <Text style={styles.buttonText}>Weather</Text>
+      <Text style={styles.description}>How Weather Affected Your Day</Text>
       <BarChart
         data={{
           labels: Object.keys(values).map(k => k[0].toUpperCase() + k.substr(1)),
@@ -213,10 +215,27 @@ function StreakChart(data) {
     date.setDate(date.getDate() + 1);
   }
 
+  function Days() {
+    return (<View style={{width: '10%', height: 100, backgroundColor: 'rgb(255,255,255)', margin:20}}>
+        
+    </View>)
+
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.buttonText}>Your Progress</Text>
-      <ContributionGraph
+      <Text style={styles.buttonText}>Your Streak</Text>
+      <Text style={styles.description}>The days you logged are lit up</Text>
+      <View style={{width: '100%', height: 300, flexDirection:'row'}}>
+        <Days />
+        <Days />
+        <Days />
+        <Days />
+        <Days />
+        <Days />
+        <Days />
+      </View>
+      {/* <ContributionGraph
         values={listDates}
         endDate={endDate}
         numDays={numDays}
@@ -228,7 +247,7 @@ function StreakChart(data) {
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: () => '#ffffff',
         }}
-      />
+      /> */}
     </View>
   )
 }

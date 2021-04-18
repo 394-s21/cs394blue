@@ -187,7 +187,7 @@ function StreakChart(data) {
   }
 
   // TODO: Make number of days be an input
-  const numDays = 70;
+  const numDays = 7;
   const endDate = new Date();
   let startDate = new Date();
   startDate.setDate(endDate.getDate() - numDays + 1);
@@ -209,24 +209,26 @@ function StreakChart(data) {
     })
     if (entry) {
       listDates.push({date: entry.date, count: 1});
+    } else {
+      
     }
 
     // Increment date
     date.setDate(date.getDate() + 1);
   }
 
-  function Days() {
-    return (<View style={{width: '10%', height: 100, backgroundColor: 'rgb(255,255,255)', margin:20}}>
-        
+  const Days = () => {
+    return (<View style={styles.dayBox}>
+      {/* <Text>{date}</Text>
+      <Text>{day}</Text> */}
     </View>)
-
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Your Streak</Text>
       <Text style={styles.description}>The days you logged are lit up</Text>
-      <View style={{width: '100%', height: 300, flexDirection:'row'}}>
+      <View style={styles.daysContainer}>
         <Days />
         <Days />
         <Days />
@@ -280,5 +282,16 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 6,
     backgroundColor: '#ffffff'
+  },
+  dayBox: {
+    width: '10%', 
+    height: 100, 
+    backgroundColor: 'rgb(255,255,255)',
+    margin:20
+  },
+  daysContainer: {
+    width: '100%', 
+    flexDirection:'row',
+    padding: 10
   }
 });

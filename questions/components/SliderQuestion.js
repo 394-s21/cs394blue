@@ -1,25 +1,29 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 
 export default function SliderQuestion(props) {
+
+    const [sliderValue, setSliderValue] = useState(0)
+
     return (
         <View style={styles.container}>
-            <View style={{paddingBottom: 20}}>
-                <Text style={styles.topText}>{props.question}</Text>
-            </View>
+            <Text style={styles.topText}>{props.question}</Text>
+            <Text style={styles.topText}>{sliderValue}</Text>            
             <Slider
                 style={{width: 350, height: 40}}
                 minimumValue={props.min}
                 maximumValue={props.max}
                 step={props.step}
+                thumbTintColor='rgb(255,255,255)'
+                minimumTrackTintColor='rgb(255,255,255)'
+                onValueChange={(value) => {
+                    setSliderValue(value)
+                    }}
             />
-            <View style={{paddingTop: 20}}>
-                <TouchableOpacity style={styles.button} onPress={props.next}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                </TouchableOpacity>
-            </View>
-            
+            <TouchableOpacity style={styles.button} onPress={props.next}>
+                <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
         </View>
     )
 }

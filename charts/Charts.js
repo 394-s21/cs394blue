@@ -6,7 +6,7 @@ import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 import { firebase } from '../fire';
 
 export function Charts({navigation}) {
-  
+
   // Make input later
   var name = "entries";
   const [entry, setEntry] = useState([]);
@@ -34,7 +34,7 @@ export function Charts({navigation}) {
       </ScrollView>
     </SafeAreaView>
   )
-  
+
 }
 
 function DayRatingChart(data) {
@@ -193,11 +193,7 @@ function StreakChart(data) {
   startDate.setDate(endDate.getDate() - numDays + 1);
 
   let date = startDate;
-  // Set range values
-  let listDates = [
-    {date: "2000-01-01", count: 0},
-    {date: "2000-01-02", count: 1}
-  ]
+  let listDates = []
 
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
@@ -208,49 +204,54 @@ function StreakChart(data) {
       return entryDate.valueOf() === date.valueOf();
     })
     if (entry) {
-      listDates.push({date: entry.date, count: 1});
-    } else {
-      
+      listDates.push({date: entry.date, logged: true});
+    }
+    else {
+      listDates.push({date: date, logged: false});
     }
 
     // Increment date
     date.setDate(date.getDate() + 1);
   }
 
-  const Days = () => {
-    return (<View style={styles.dayBox}>
-      {/* <Text>{date}</Text>
-      <Text>{day}</Text> */}
+  const Day = (logged, date) => {
+    const style = logged ? styles.dayBox : styles.otherBox;
+    console.log(logged);
+    console.log(date);
+    return (<View style={style}>
+      <Text>{date}</Text>
+      {/* <Text>{day}</Text> */}
     </View>)
   }
+
+  console.log(listDates)
 
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Your Streak</Text>
       <Text style={styles.description}>The days you logged are lit up</Text>
       <View style={styles.daysContainer}>
-        <Days />
-        <Days />
-        <Days />
-        <Days />
-        <Days />
-        <Days />
-        <Days />
+        {listDates.map(entry => {
+          <Day
+            logged={entry.logged}
+            date={entry.date}
+          />
+        })}
       </View>
-      {/* <ContributionGraph
-        values={listDates}
-        endDate={endDate}
-        numDays={numDays}
-        width={Dimensions.get("window").width}
-        height={200}
-        chartConfig={{
-          backgroundGradientFromOpacity: 0,
-          backgroundGradientToOpacity: 0,
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: () => '#ffffff',
-        }}
-      /> */}
     </View>
+      // <ContributionGraph
+      //   values={listDates}
+      //   endDate={endDate}
+      //   numDays={numDays}
+      //   width={Dimensions.get("window").width}
+      //   height={200}
+      //   chartConfig={{
+      //     backgroundGradientFromOpacity: 0,
+      //     backgroundGradientToOpacity: 0,
+      //     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      //     labelColor: () => '#ffffff',
+      //   }}
+      // />
   )
 }
 
@@ -284,13 +285,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   dayBox: {
-    width: '10%', 
-    height: 100, 
+    width: '10%',
+    height: 100,
     backgroundColor: 'rgb(255,255,255)',
     margin:20
   },
+  otherBox: {
+    width: '10%',
+    height: 100,
+    backgroundColor: 'rgb(0, 0, 0)',
+    margin:20
+  },
   daysContainer: {
-    width: '100%', 
+    width: '100%',
     flexDirection:'row',
     padding: 10
   }

@@ -7,9 +7,11 @@ import {firebase} from '../fire';
 
 
 function logToday(navigation){
-    firebase.database().ref('entries').push({
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
+    var id = firebase.database().ref('entries').push({
         dailyRating: 0,
-        date: '2021-04-25',
+        date: date,
         exercise: true,
         wakeupTime: '8:00-9:30',
         weather: 'sunny'

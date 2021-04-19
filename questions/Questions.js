@@ -4,19 +4,21 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
 import {firebase} from '../fire';
+import { TabRouter } from '@react-navigation/routers';
 
 
 function logToday(navigation){
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
-    var id = firebase.database().ref('entries').push({
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
+    var ref = firebase.database().ref('entries').push({
         dailyRating: 0,
         date: date,
         exercise: true,
         wakeupTime: '8:00-9:30',
         weather: 'sunny'
     });
-    navigation.navigate('Weather');
+    const id = ref.key;
+    navigation.navigate('Weather',{id});
 }
 
 export function LogStart({navigation}) {
@@ -33,12 +35,14 @@ export function LogStart({navigation}) {
     )
 }
 
-export function Weather({navigation}) {
+export function Weather({navigation, route}) {
     return (
         <ButtonQuestion
             question="How was the weather today?"
             options={["Sunny", "Cloudy", "Rainy", "Snow", "Don't know because I never left the house"]}
             next={(str) => navigation.navigate('Exercise')}
+            questionId = 'weather'
+            id = {route.params.id}
         />
     )
 }

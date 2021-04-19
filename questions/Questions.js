@@ -3,11 +3,24 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
+import {firebase} from '../fire';
+
+
+function logToday(navigation){
+    firebase.database().ref('entries').push({
+        dailyRating: 0,
+        date: '2021-04-25',
+        exercise: true,
+        wakeupTime: '8:00-9:30',
+        weather: 'sunny'
+    });
+    navigation.navigate('Weather');
+}
 
 export function LogStart({navigation}) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=>navigation.navigate('Weather')} style={styles.button}>
+            <TouchableOpacity onPress={()=>logToday(navigation)} style={styles.button}>
                 <Text style={styles.buttonText}>Log Today</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate('Charts')} style={styles.button}>

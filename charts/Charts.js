@@ -21,13 +21,18 @@ export function Charts({navigation}) {
     return () => { db.off('value', handleData); };
   }, []);
 
+  var data = [];
+  for (var id in entry) {
+    data.push(entry[id]);
+  }
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollview}>
         <Text style={styles.topText}>Charts</Text>
-        {DayRatingChart(entry)}
-        {WeatherChart(entry)}
-        {StreakChart(entry)}
+        {DayRatingChart(data)}
+        {WeatherChart(data)}
+        {StreakChart(data)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>
@@ -38,14 +43,10 @@ export function Charts({navigation}) {
 }
 
 function DayRatingChart(data) {
-
   
   if(!data.length) {
     return;
   }
-  
-
-
 
   // TODO: Make number of days be an input
   const numDays = 7;

@@ -10,14 +10,16 @@ import { TabRouter } from '@react-navigation/routers';
 function logToday(navigation){
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
-    var ref = firebase.database().ref('entries').push({
+    var newref = firebase.database().ref('entries').push();
+    console.log(newref);
+    newref.set({
         dailyRating: 0,
         date: date,
         exercise: true,
         wakeupTime: '8:00-9:30',
         weather: 'sunny'
     });
-    const id = ref.key;
+    const id = newref.key;
     navigation.navigate('Weather',{id});
 }
 
@@ -36,39 +38,47 @@ export function LogStart({navigation}) {
 }
 
 export function Weather({navigation, route}) {
+    const id = route.params.id;
     return (
         <ButtonQuestion
             question="How was the weather today?"
             options={["Sunny", "Cloudy", "Rainy", "Snow", "Don't know because I never left the house"]}
-            next={(str) => navigation.navigate('Exercise')}
+            next={(str) => navigation.navigate('Exercise', {id})}
             questionId = 'weather'
-            id = {route.params.id}
+            id = {id}
         />
     )
 }
 
-export function Exercise({navigation}) {
+export function Exercise({navigation, route}) {
+    const id = route.params.id;
     return(
         <ButtonQuestion
             question="Did you exercise today?"
             options={["Yes", "No"]}
-            next={(str) => navigation.navigate('Wake')}
+            next={(str) => navigation.navigate('Wake',{id})}
+            questionId = 'exercise'
+            id = {id}
         />
     )
 }
 
-export function Wake({navigation}) {
+export function Wake({navigation, route}) {
+    const id = route.params.id;
     return (
         <ButtonQuestion
             question="What time did you wake up today?"
             options={["5:00 - 6:30 AM", "6:30 - 8:00 AM", "8:00 - 9:30 AM",
                 "9:30 - 11:00 AM", "11:00 - 12:30 PM", "After 12:30 PM"]}
-            next={(str) => navigation.navigate('DayRating')}
+            next={(str) => navigation.navigate('DayRating',{id})}
+            questionId = 'wake'
+            id = {id}
         />
     )
 }
 
-export function DayRating({navigation}) {
+export function DayRating({navigation, route}) {
+    const id = route.params.id;
     return (
         <SliderQuestion
             question="How was your day today?"
@@ -76,6 +86,8 @@ export function DayRating({navigation}) {
             max={10}
             step={1}
             next={(str) => navigation.navigate('Charts')}
+            questionId = 'day_rating'
+            id = {id}
         />
     )
 }

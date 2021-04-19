@@ -1,6 +1,18 @@
 import React,{ useState } from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
+import {firebase} from '../../fire';
+
+function updateField(next, rating, questionId, id){
+    if (questionId === 'day_rating'){
+        //console.log('entries/'+id)
+        firebase.database().ref('entries/'+id).update({
+            dailyRating: rating
+        });
+    }
+    //add other questions here
+    next();
+}
 
 export default function SliderQuestion(props) {
 
@@ -21,7 +33,7 @@ export default function SliderQuestion(props) {
                     setSliderValue(value)
                     }}
             />
-            <TouchableOpacity style={styles.button} onPress={props.next}>
+            <TouchableOpacity style={styles.button} onPress={()=>updateField(props.next,sliderValue,props.questionId,props.id)}>
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>

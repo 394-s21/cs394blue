@@ -30,7 +30,7 @@ export function Charts({navigation}) {
         {StreakChart(entry)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
-            </TouchableOpacity>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
@@ -38,9 +38,14 @@ export function Charts({navigation}) {
 }
 
 function DayRatingChart(data) {
+
+  
   if(!data.length) {
     return;
   }
+  
+
+
 
   // TODO: Make number of days be an input
   const numDays = 7;
@@ -126,7 +131,7 @@ function WeatherChart(data) {
     "sunny": [0, 0],
     "cloudy": [0, 0],
     "rainy": [0, 0],
-    "snowy": [0, 0],
+    "snow": [0, 0],
     "unknown": [0, 0],
     "max": [10, 1]
   }

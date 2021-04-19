@@ -118,6 +118,13 @@
             "weather": "sunny",
             "exercise": true,
             "wakeupTime": "8:00-9:30"
+        },
+        {
+            "date": "2021-04-21",
+            "dailyRating": 10,
+            "weather": "rainy",
+            "exercise": true,
+            "wakeupTime": "9:30-11:00"
         }
     ]
 }

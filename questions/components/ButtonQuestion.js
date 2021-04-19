@@ -11,21 +11,32 @@ export default function ButtonQuestion(props) {
     )
 }
 
-function updateField(option, questionId, id){
+function updateField(next, option, questionId, id){
     if (questionId === 'weather'){
         //console.log('entries/'+id)
         firebase.database().ref('entries/'+id).update({
             weather: option
         });
-    } 
-    //add other questions in here
+    } else if (questionId === 'exercise'){
+        if (option === 'No'){
+            firebase.database().ref('entries/'+id).update({
+                exercise: false
+            });
+        }
+    } else if (questionId === 'wake'){
+        firebase.database().ref('entries/'+id).update({
+            wakeupTime: option
+        });
+    }
+    //add other questions here
+    next();
 }
 
 const renderButtons = (options, next, questionId, id) => {
     
     return options.map((option, index) => (
         <View key={index} style={{paddingTop: 15, paddingBottom: 15, width: "75%"}}>
-            <TouchableOpacity onPress={()=>{next;updateField(option,questionId, id)}} style={styles.button}>
+            <TouchableOpacity onPress={()=>updateField(next, option, questionId, id)} style={styles.button}>
                 <Text style={styles.buttonText}>{option}</Text>
             </TouchableOpacity>
         </View>

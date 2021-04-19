@@ -1,30 +1,33 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import {firebase} from '../../fire';
 
 export default function ButtonQuestion(props) {
+
     return (
         <View style={styles.container}>
             <Text style={styles.topText}>{props.question}</Text>
-            {renderButtons(props.options, props.next, props.questionId, props.id)}
+            {renderButtons(props.name, props.options, props.next, props.questionId, props.id)}
         </View>
     )
 }
 
-function updateField(next, option, questionId, id){
+function updateField(name, next, option, questionId, id){
     if (questionId === 'weather'){
-        //console.log('entries/'+id)
-        firebase.database().ref('entries/'+id).update({
+        if(option === "Don't know because I never left the house") {
+            option = 'unknown';
+        }
+        firebase.database().ref(name+'/'+id).update({
             weather: option
         });
     } else if (questionId === 'exercise'){
         if (option === 'No'){
-            firebase.database().ref('entries/'+id).update({
+            firebase.database().ref(name+'/'+id).update({
                 exercise: false
             });
         }
     } else if (questionId === 'wake'){
-        firebase.database().ref('entries/'+id).update({
+        firebase.database().ref(name+'/'+id).update({
             wakeupTime: option
         });
     }
@@ -32,11 +35,11 @@ function updateField(next, option, questionId, id){
     next();
 }
 
-const renderButtons = (options, next, questionId, id) => {
+const renderButtons = (name, options, next, questionId, id) => {
     
     return options.map((option, index) => (
         <View key={index} style={{paddingTop: 15, paddingBottom: 15, width: "75%"}}>
-            <TouchableOpacity onPress={()=>updateField(next, option, questionId, id)} style={styles.button}>
+            <TouchableOpacity onPress={()=>updateField(name, next, option, questionId, id)} style={styles.button}>
                 <Text style={styles.buttonText}>{option}</Text>
             </TouchableOpacity>
         </View>

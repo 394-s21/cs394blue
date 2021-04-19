@@ -146,8 +146,9 @@ function WeatherChart(data) {
       return entryDate.valueOf() === date.valueOf();
     })
     if (entry) {
-      values[entry.weather][0] += entry.dailyRating;
-      values[entry.weather][1] += 1;
+      console.log(entry.weather);
+      values[entry.weather.toLowerCase()][0] += entry.dailyRating;
+      values[entry.weather.toLowerCase()][1] += 1;
     }
 
     // Increment date

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
-import {firebase} from '../../fire';
+import {firebase} from '../../firebase.js';
 
 export default function ButtonQuestion(props) {
 

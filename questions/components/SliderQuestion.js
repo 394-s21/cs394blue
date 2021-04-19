@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
-import {firebase} from '../../fire';
+import {firebase} from '../../firebase.js';
 
 function updateField(name, next, rating, questionId, id){
     if (questionId === 'day_rating'){

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, Touchable
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
 import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
-import { firebase } from '../fire';
+import { firebase } from '../firebase.js';
 
 export function Charts({navigation}) {
   
@@ -146,7 +146,6 @@ function WeatherChart(data) {
       return entryDate.valueOf() === date.valueOf();
     })
     if (entry) {
-      console.log(entry.weather);
       values[entry.weather.toLowerCase()][0] += entry.dailyRating;
       values[entry.weather.toLowerCase()][1] += 1;
     }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'
-import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
+import { LineChart, BarChart, ContributionGraph, ProgressChart } from 'react-native-chart-kit';
 //import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
 import { firebase } from '../firebase.js';
@@ -205,6 +205,9 @@ function StreakChart(data) {
     {date: "2000-01-02", count: 1}
   ]
 
+  //code for progress chart
+  var count = 0;
+
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
     let entry = data.find(e => {
@@ -215,6 +218,7 @@ function StreakChart(data) {
     })
     if (entry) {
       listDates.push({date: entry.date, count: 1});
+      count++;
     } else {
       
     }
@@ -222,6 +226,12 @@ function StreakChart(data) {
     // Increment date
     date.setDate(date.getDate() + 1);
   }
+
+  const streakPercentage = count / numDays;
+  const progressData = {
+    labels: ["Streak"],
+    data: [streakPercentage]
+  };
 
   const Days = () => {
     return (<View style={styles.dayBox}>
@@ -233,8 +243,8 @@ function StreakChart(data) {
   return (
     <View style={styles.container}>
       <Text style={styles.buttonText}>Your Streak</Text>
-      <Text style={styles.description}>The days you logged are lit up</Text>
-      <View style={styles.daysContainer}>
+      <Text style={styles.description}>The percentage of days you logged in the past week is lit up</Text>
+      {/* <View style={styles.daysContainer}>
         <Days />
         <Days />
         <Days />
@@ -243,7 +253,7 @@ function StreakChart(data) {
         <Days />
         <Days />
       </View>
-      {/* <ContributionGraph
+      <ContributionGraph
         values={listDates}
         endDate={endDate}
         numDays={numDays}
@@ -256,6 +266,24 @@ function StreakChart(data) {
           labelColor: () => '#ffffff',
         }}
       /> */}
+      <ProgressChart
+        data={progressData}
+        width={Dimensions.get("window").width}
+        height={300}
+        strokeWidth={40}
+        radius={100}
+        chartConfig = {{
+          backgroundGradientFrom: "#1E2923",
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientTo: "#08130D",
+          backgroundGradientToOpacity: 0.5,
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          strokeWidth: 3, // optional, default 3
+          barPercentage: 0.5,
+          useShadowColorFromDataset: false // optional
+        }}
+        hideLegend={true}
+      />
     </View>
   )
 }

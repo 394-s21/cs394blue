@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions, SafeAreaView, TouchableOpacity } from 'react-native'
 import { LineChart, BarChart, ContributionGraph } from 'react-native-chart-kit';
-import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
+//import { Weather, DayRating, Exercise, Wake } from '../questions/Questions';
 
 import { firebase } from '../firebase.js';
 

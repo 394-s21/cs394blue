@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
 import {firebase} from '../firebase.js';
-import { TabRouter } from '@react-navigation/routers';
+//import { TabRouter } from '@react-navigation/routers';
 
 function logToday(name, today, navigation, id, firstQuestion) {
     if(!id) {

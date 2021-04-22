@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import * as Font from 'expo-font';
-import {AppLoading} from 'expo';
-import { StyleSheet, Text, View, ScrollableList, TextInput, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Weather, DayRating, Exercise, Wake, LogStart } from './questions/Questions';
 import { Charts } from './charts/Charts';
 

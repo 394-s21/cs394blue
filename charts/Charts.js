@@ -6,7 +6,7 @@ import { LineChart, BarChart, ContributionGraph, ProgressChart } from 'react-nat
 import { firebase } from '../firebase.js';
 
 export function Charts({navigation}) {
-  
+
   // Make input later
   var name = "entries";
   const [entry, setEntry] = useState([]);
@@ -33,17 +33,18 @@ export function Charts({navigation}) {
         {DayRatingChart(data)}
         {WeatherChart(data)}
         {StreakChart(data)}
+        {ProductivityChart(data)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
-  
+
 }
 
 function DayRatingChart(data) {
-  
+
   if(!data.length) {
     return;
   }
@@ -220,7 +221,7 @@ function StreakChart(data) {
       listDates.push({date: entry.date, count: 1});
       count++;
     } else {
-      
+
     }
 
     // Increment date
@@ -288,6 +289,79 @@ function StreakChart(data) {
   )
 }
 
+function ProductivityChart(data) {
+
+  if(!data.length) {
+    return;
+  }
+
+  // TODO: Make number of days be an input
+  const numDays = 7;
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  const endDate = new Date();
+  let startDate = new Date();
+  startDate.setDate(endDate.getDate() - numDays + 1);
+
+  let date = startDate;
+  let labels = [];
+  let productivity = [];
+
+  // Loop through entries by date and fetch data
+  for (let i = 0; i < numDays; i++) {
+    labels.push(daysOfWeek[date.getDay()])
+    let entry = data.find(e => {
+      let entryDate = new Date(e.date.replace(/-/g, '/'))
+      entryDate.setHours(0, 0, 0, 0)
+      date.setHours(0, 0, 0, 0)
+      return entryDate.valueOf() === date.valueOf();
+    })
+    if (entry && entry.productivity) {
+      productivity.push(entry.productivity);
+    }
+    else {
+      productivity.push(0);
+    }
+
+    // Increment date
+    date.setDate(date.getDate() + 1);
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.buttonText}>Productivity</Text>
+      <Text style={styles.description}>How productive you were over the last week</Text>
+      <LineChart
+        data={{
+          labels: labels,
+          datasets: [
+            {
+              data: productivity,
+              strokeWidth: 1
+            },
+            {
+              // Set max y value in graph by creating invisible data point
+              data: [5],
+              color: () => 'rgba(0, 0, 0, 0)'
+            }
+          ]
+        }}
+        fromZero={true}
+        segments={5}
+        // withInnerLines={false}
+        withVerticalLines={false}
+        width={Dimensions.get("window").width}
+        height={250}
+        chartConfig={{
+          backgroundGradientFromOpacity: 0,
+          backgroundGradientToOpacity: 0,
+          decimalPlaces: 0,
+          color: () => '#ffffff',
+        }}
+      />
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -318,13 +392,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   dayBox: {
-    width: '10%', 
-    height: 100, 
+    width: '10%',
+    height: 100,
     backgroundColor: 'rgb(255,255,255)',
     margin:20
   },
   daysContainer: {
-    width: '100%', 
+    width: '100%',
     flexDirection:'row',
     padding: 10
   }

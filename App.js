@@ -3,6 +3,8 @@ import * as Font from 'expo-font';
 import { StyleSheet } from 'react-native';
 import { Weather, DayRating, Exercise, Wake, LogStart } from './questions/Questions';
 import { Charts } from './charts/Charts';
+import Login from './signin/Login';
+import Register from './signin/Register';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -22,6 +24,10 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Login"
+          component={Login}/>
+          {/* <Stack.Screen name="Register"
+          component={Register}/> */}
           <Stack.Screen name="Home"
           component={LogStart}/>
           <Stack.Screen name="Weather"

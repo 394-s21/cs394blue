@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/database";
+import "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDFEyre-F44Li858TxbjMcbuu8YUp7Znio",
@@ -12,6 +13,14 @@ const firebaseConfig = {
     measurementId: "G-GWXNBEBE9N"
   };
 
+async function loginWithEmail (email, password) {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+}
+
+async function registerWithEmail (email, password) {
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
+}
+
 firebase.initializeApp(firebaseConfig);
 
-export { firebase };
+export { firebase, loginWithEmail, registerWithEmail };

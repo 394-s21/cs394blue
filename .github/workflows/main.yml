@@ -1,0 +1,53 @@
+name: CI
+
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web version
+        run: expo build:web
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-build
+          path: web-build/
+          
+  # Run tests and lint
+  # test:
+  #   needs: build
+  
+  deploy:
+    needs: build
+    
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: web-build
+          path: web-build/
+      
+      - name: Deploy to Firebase
+        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}

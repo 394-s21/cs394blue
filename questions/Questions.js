@@ -155,6 +155,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 30,
         textAlign: 'center',
-        fontFamily: 'Futura'
+        fontFamily: 'roboto-regular'
     }
 });

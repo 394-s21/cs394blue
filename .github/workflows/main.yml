@@ -14,9 +14,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build web version
         run: expo build:web
@@ -40,8 +45,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         
+      - name: Set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+        
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         
       - name: Download artifact
         uses: actions/download-artifact@v2

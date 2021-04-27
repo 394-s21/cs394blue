@@ -14,7 +14,6 @@ const Login = ({navigation}) => {
         try {
             const auth = await loginWithEmail(em, pw)
             const user = auth.user
-            console.log(user.uid);
             navigation.navigate('Home',{name: user.uid})
         } catch (error) {
             alert(error.message)

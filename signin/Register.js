@@ -4,7 +4,7 @@ import { TextInput, StyleSheet, TouchableOpacity, SafeAreaView, Text } from 'rea
 
 import { firebase, registerWithEmail } from '../firebase.js';
 
-const Login = ({navigation}) => {
+const Register = ({navigation}) => {
     const [email, onChangeEmail] = useState("")
     const [password, onChangePassword] = useState("")
     const [secondPassword, onChangeSecondPassword] = useState("")
@@ -25,7 +25,7 @@ const Login = ({navigation}) => {
             const auth = await registerWithEmail(email, password)
             const user = auth.user
             await user.updateProfile({displayName: email})
-            navigation.navigate('Home',{name: user.id})
+            navigation.navigate('Home',{name: user.uid})
         } catch (error) {
             alert(error.message)
             setRegisterError(error.message)
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   });
 
 
-export default Login;
+export default Register;

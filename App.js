@@ -1,12 +1,11 @@
 import React from 'react';
+import { Weather, DayRating, Exercise, Wake, LogStart, Productivity } from './questions/Questions';
 import * as Font from 'expo-font';
-import { StyleSheet,Button } from 'react-native';
-import { Weather, DayRating, Exercise, Wake, LogStart } from './questions/Questions';
+import { StyleSheet, Button } from 'react-native';
 import { Charts } from './charts/Charts';
 import Login from './signin/Login';
 import Register from './signin/Register';
-import {firebase} from './firebase.js'
-
+import { firebase } from './firebase.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
@@ -36,13 +35,15 @@ export default function App() {
           component={Register} />
         <Stack.Screen name="Home"
           component={LogStart}
-          options={({navigation}) => 
-          ({headerRight: () => (
-          <Button 
-          title="LogOut"
-          onPress={() =>logOut(navigation) }/>)})}
-          />
-          <Stack.Screen name="Weather"
+          options={({ navigation }) =>
+          ({
+            headerRight: () => (
+              <Button
+                title="Log Out"
+                onPress={() => logOut(navigation)} />)
+          })}
+        />
+        <Stack.Screen name="Weather"
           component={Weather} />
         <Stack.Screen name="Exercise"
           component={Exercise} />
@@ -50,8 +51,11 @@ export default function App() {
           component={Wake} />
         <Stack.Screen name="DayRating"
           component={DayRating} />
+        <Stack.Screen name="Productivity"
+          component={Productivity} />
         <Stack.Screen name="Charts"
-          component={Charts} />
+          component={Charts}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -15,7 +15,8 @@ function logToday(name, today, navigation, id, firstQuestion) {
             date: date,
             exercise: true,
             wakeupTime: '8:00-9:30',
-            weather: 'sunny'
+            weather: 'sunny',
+            productivity: 1
         });
         id = newref.key;
     }
@@ -46,7 +47,6 @@ export function LogStart({navigation,route}) {
 
     const today = new Date();
     var id = null;
-
     if (data != []) {
         let entry = data.find(e => {
             let entryDate = new Date(e.date.replace(/-/g, '/'));
@@ -58,6 +58,18 @@ export function LogStart({navigation,route}) {
         if(entry) {
            id = entry["id"];
         }
+    } else {
+        const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
+        var newref = firebase.database().ref(name).push();
+        newref.set({
+            dailyRating: 0,
+            date: date,
+            exercise: true,
+            wakeupTime: '8:00-9:30',
+            weather: 'sunny',
+            productivity: 1
+        });
+        id = newref.key;
     }
 
     // Will be input
@@ -132,8 +144,25 @@ export function DayRating({navigation, route}) {
             min={0}
             max={10}
             step={1}
-            next={(str) => navigation.navigate('Charts',{name})}
+            next={(str) => navigation.navigate('Productivity',{id, name})}
             questionId = 'day_rating'
+            id = {id}
+        />
+    )
+}
+
+export function Productivity({navigation, route}) {
+    const id = route.params.id;
+    const name = route.params.name;
+    return (
+        <SliderQuestion
+            name={name}
+            question="How productive were you today?"
+            min={0}
+            max={5}
+            step={1}
+            next={(str) => navigation.navigate('Charts',{name})}
+            questionId = 'productivity'
             id = {id}
         />
     )

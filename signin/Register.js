@@ -20,15 +20,12 @@ const Login = ({navigation}) => {
     }
 
     async function handleRegister (email, password, secondPassword) {
-        if (password != secondPassword) {
-            
-        }
         setRegisterError(null)
         try {
             const auth = await registerWithEmail(email, password)
             const user = auth.user
             await user.updateProfile({displayName: email})
-            navigation.navigate('Home')
+            navigation.navigate('Home',{name: user.id})
         } catch (error) {
             alert(error.message)
             setRegisterError(error.message)

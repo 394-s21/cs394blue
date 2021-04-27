@@ -14,7 +14,7 @@ const firebaseConfig = {
   };
 
 async function loginWithEmail (email, password) {
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
 async function registerWithEmail (email, password) {

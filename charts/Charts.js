@@ -5,10 +5,10 @@ import { LineChart, BarChart, ContributionGraph, ProgressChart } from 'react-nat
 
 import { firebase } from '../firebase.js';
 
-export function Charts({navigation}) {
+export function Charts({navigation, route}) {
   
   // Make input later
-  var name = "entries";
+  const name = route.params.name;
   const [entry, setEntry] = useState([]);
 
   useEffect(() => {

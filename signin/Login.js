@@ -12,8 +12,10 @@ const Login = ({navigation}) => {
     async function handleSubmit (em, pw) {
         setSignInError(null)
         try {
-            await loginWithEmail(em, pw)
-            navigation.navigate('Home')
+            const auth = await loginWithEmail(em, pw)
+            const user = auth.user
+            console.log(user.uid);
+            navigation.navigate('Home',{name: user.uid})
         } catch (error) {
             alert(error.message)
             setSignInError(error.message)

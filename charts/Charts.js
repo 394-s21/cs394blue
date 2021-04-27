@@ -49,7 +49,7 @@ function DayRatingChart(data) {
   if(!data.length) {
     return;
   }
-
+  
   // TODO: Make number of days be an input
   const numDays = 7;
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -449,12 +449,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     paddingBottom: 20,
-    fontFamily: 'Futura-CondensedExtraBold'
+    fontFamily: 'roboto-bold'
   },
   buttonText: {
     fontSize: 18,
     textAlign: 'center',
-    fontFamily: 'Futura'
+    fontFamily: 'roboto-regular'
   },
   button: {
     borderColor: '#0099cc',

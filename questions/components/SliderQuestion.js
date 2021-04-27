@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
         fontSize: 32,
         textAlign: 'center',
         paddingBottom: 20,
-        fontFamily: 'Futura-CondensedExtraBold'
+        fontFamily: 'roboto-bold'
     },
 
     buttonText: {
         fontSize: 35,
         textAlign: 'center',
-        fontFamily: 'Futura'
+        fontFamily: 'roboto-regular'
     }
 });

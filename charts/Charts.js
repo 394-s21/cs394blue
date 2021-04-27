@@ -5,6 +5,7 @@ import WeatherChart from './WeatherChart';
 import StreakChart from './StreakChart';
 import ProductivityChart from './ProductivityChart';
 import WakingChart from './WakingChart';
+import ExerciseChart from './ExerciseChart';
 import { firebase } from '../firebase.js';
 
 export function Charts({navigation}) {
@@ -37,6 +38,7 @@ export function Charts({navigation}) {
         {StreakChart(data)}
         {ProductivityChart(data)}
         {WakingChart(data)}
+        {ExerciseChart(data)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>

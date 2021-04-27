@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useReducer } from 'react';
-import { TextInput, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { TextInput, StyleSheet, TouchableOpacity, SafeAreaView, Text } from 'react-native';
 
 import { firebase, registerWithEmail } from '../firebase.js';
 
@@ -31,7 +31,7 @@ const Login = ({navigation}) => {
             navigation.navigate('Home')
         } catch (error) {
             alert(error.message)
-            setSignInError(error.message)
+            setRegisterError(error.message)
         }
     }
 
@@ -55,8 +55,8 @@ const Login = ({navigation}) => {
             secureTextEntry={true}
             />
             <TouchableOpacity
-            onPress={checkPasswords(email, password, secondPassword)}>
-                Submit
+            onPress={() => {checkPasswords(email, password, secondPassword)}}>
+                <Text>Submit</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );

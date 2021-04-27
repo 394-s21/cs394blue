@@ -9,6 +9,11 @@ function updateField(name, next, rating, questionId, id){
             dailyRating: rating
         });
     }
+    else if (questionId === 'productivity'){
+        firebase.database().ref(name+'/'+id).update({
+            productivity: rating
+        });
+    }
     //add other questions here
     next();
 }
@@ -20,7 +25,7 @@ export default function SliderQuestion(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.topText}>{props.question}</Text>
-            <Text style={styles.topText}>{sliderValue}</Text>            
+            <Text style={styles.topText}>{sliderValue}</Text>
             <Slider
                 style={{width: 350, height: 40}}
                 minimumValue={props.min}

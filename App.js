@@ -1,9 +1,8 @@
 import React from 'react';
+import { Weather, DayRating, Exercise, Wake, LogStart, Productivity } from './questions/Questions';
 import * as Font from 'expo-font';
 import { StyleSheet } from 'react-native';
-import { Weather, DayRating, Exercise, Wake, LogStart } from './questions/Questions';
 import { Charts } from './charts/Charts';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
@@ -32,6 +31,8 @@ export default function App() {
           component={Wake} />
           <Stack.Screen name="DayRating"
           component={DayRating}/>
+          <Stack.Screen name="Productivity"
+          component={Productivity} />
           <Stack.Screen name="Charts"
           component={Charts} />
         </Stack.Navigator>

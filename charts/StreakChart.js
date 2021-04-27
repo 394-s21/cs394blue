@@ -23,6 +23,7 @@ export default function StreakChart(data) {
 
   //code for progress chart
   var count = 0;
+  var streak = [0,0,0,0,0,0,0];
 
   // Loop through entries by date and fetch data
   for (let i = 0; i < numDays; i++) {
@@ -34,16 +35,27 @@ export default function StreakChart(data) {
     })
     if (entry) {
       listDates.push({date: entry.date, count: 1});
-      count++;
+      streak[i] = 1;
+      //count++;
     } else {
-
     }
 
     // Increment date
     date.setDate(date.getDate() + 1);
   }
 
-  const streakPercentage = count / numDays;
+  var max = 0;
+  var count = 0;
+  for (let i=0;i<numDays;i++){
+    if (streak[i]==0){
+        count = 0;
+    } else{
+        count++;
+        max = Math.max(max, count);
+    }
+  }
+
+  const streakPercentage = max / numDays;
   const progressData = {
     labels: ["Streak"],
     data: [streakPercentage]
@@ -58,8 +70,8 @@ export default function StreakChart(data) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.buttonText}>Your Streak</Text>
-      <Text style={styles.description}>The percentage of days you logged in the past week is lit up</Text>
+      <Text style={styles.buttonText}>Your Streak: {max} day(s)</Text>
+      <Text style={styles.description}>The percentage of your streak over the past week is lit up</Text>
       {/* <View style={styles.daysContainer}>
         <Days />
         <Days />

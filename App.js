@@ -9,30 +9,12 @@ import { firebase } from './firebase.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Stack = createStackNavigator();
-
-export default function App() {
-  useEffect(() => {
-    Font.loadAsync({
-      'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
-      'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
-      'roboto-thin': require('./assets/fonts/Roboto-Thin.ttf')
-    })
-  }, [])
-
-  function logOut(navigation) {
-    firebase.auth().signOut()
-    navigation.navigate("Login")
-  }
-
+function LogScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login"
-          component={Login} />
-        <Stack.Screen name="Register"
-          component={Register} />
+    <Stack.Navigator>
         <Stack.Screen name="Home"
           component={LogStart}
           options={({ navigation }) =>
@@ -53,10 +35,73 @@ export default function App() {
           component={DayRating} />
         <Stack.Screen name="Productivity"
           component={Productivity} />
-        <Stack.Screen name="Charts"
-          component={Charts}
-        />
-      </Stack.Navigator>
+    </Stack.Navigator>
+  );
+}
+
+function ChartsScreen() {
+  return (
+    {Charts}
+  );
+}
+
+function UserScreen() {
+  return (
+    <Stack.Navigator>
+        <Stack.Screen name="Login"
+          component={Login} />
+        <Stack.Screen name="Register"
+          component={Register} />
+    </Stack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  useEffect(() => {
+    Font.loadAsync({
+      'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+      'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+      'roboto-thin': require('./assets/fonts/Roboto-Thin.ttf')
+    })
+  }, [])
+
+  function logOut(navigation) {
+    firebase.auth().signOut()
+    navigation.navigate("Login")
+  }
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Log') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Charts') {
+            iconName = focused ? 'ios-list' : 'ios-list';
+          } else if (route.name === 'User') {
+            iconName = focused ? 'ios-list' : 'ios-list';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#0099cc',
+        inactiveTintColor: 'gray',
+      }}
+      >
+        <Tab.Screen name="Log" component={LogScreen} />
+        <Tab.Screen name="Charts" component={Charts} />
+        <Tab.Screen name="User" component={UserScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

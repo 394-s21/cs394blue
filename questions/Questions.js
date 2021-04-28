@@ -25,7 +25,7 @@ function logToday(name, today, navigation, id, firstQuestion) {
 
 export function LogStart({navigation,route}) {
     // Will change to input
-    const name = route.params.name;
+    const name = 'Home';//route.params.name;
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {

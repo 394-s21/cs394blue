@@ -11,7 +11,7 @@ import { firebase } from '../firebase.js';
 export function Charts({navigation, route}) {
   
   // Make input later
-  const name = route.params.name;
+  const name = 'Home';//route.params.name;
   const [entry, setEntry] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function Charts({navigation, route}) {
   }
 
   return (
-    <SafeAreaView>
+    //<SafeAreaView>
       <ScrollView style={styles.scrollview}>
         <Text style={styles.topText}>Charts</Text>
         {DayRatingChart(data)}
@@ -43,7 +43,7 @@ export function Charts({navigation, route}) {
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    //</SafeAreaView>
   )
 
 }

@@ -23,9 +23,9 @@ function logToday(name, today, navigation, id, firstQuestion) {
     navigation.navigate(firstQuestion,{id, name});
 }
 
-export function LogStart({navigation}) {
+export function LogStart({navigation,route}) {
     // Will change to input
-    var name = "entries";
+    const name = 'Home';//route.params.name;
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
@@ -47,16 +47,29 @@ export function LogStart({navigation}) {
 
     const today = new Date();
     var id = null;
-
-    let entry = data.find(e => {
-        let entryDate = new Date(e.date.replace(/-/g, '/'));
-        entryDate.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
-        return entryDate.valueOf() === today.valueOf();
-      })
-
-    if(entry) {
-       id = entry["id"];
+    if (data != []) {
+        let entry = data.find(e => {
+            let entryDate = new Date(e.date.replace(/-/g, '/'));
+            entryDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            return entryDate.valueOf() === today.valueOf();
+          })
+    
+        if(entry) {
+           id = entry["id"];
+        }
+    } else {
+        const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
+        var newref = firebase.database().ref(name).push();
+        newref.set({
+            dailyRating: 0,
+            date: date,
+            exercise: true,
+            wakeupTime: '8:00-9:30',
+            weather: 'sunny',
+            productivity: 1
+        });
+        id = newref.key;
     }
 
     // Will be input
@@ -67,7 +80,7 @@ export function LogStart({navigation}) {
             <TouchableOpacity onPress={()=>logToday(name, today, navigation, id, firstQuestion)} style={styles.button}>
                 <Text style={styles.buttonText}>Log Today</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Charts')} style={styles.button}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Charts',{name:name})} style={styles.button}>
                 <Text style={styles.buttonText}>Charts</Text>
             </TouchableOpacity>
         </View>
@@ -148,7 +161,7 @@ export function Productivity({navigation, route}) {
             min={0}
             max={5}
             step={1}
-            next={(str) => navigation.navigate('Charts')}
+            next={(str) => navigation.navigate('Charts',{name})}
             questionId = 'productivity'
             id = {id}
         />

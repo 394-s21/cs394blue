@@ -164,15 +164,7 @@ export function DayRating({navigation, route}) {
             min={0}
             max={10}
             step={1}
-            next={(str) => navigation.dispatch(
-                CommonActions.reset({
-                  index: 1,
-                  routes: [
-                    { name: 'Charts' }
-                  ],
-                }),
-                CommonActions.navigate('Charts')
-              )}
+            next={(str) => navigation.navigate('Charts', {name})}
             questionId = 'day_rating'
             id = {id}
         />

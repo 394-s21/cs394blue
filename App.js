@@ -14,14 +14,9 @@ import { CommonActions } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import 
-{LoginScreen, RegisterScreen} from './signin/screens';
-
-
-
+import {LoginScreen, RegisterScreen} from './signin/screens';
 
 function LogScreen() {
-
 
   function logOut(navigation) {
     firebase.auth().signOut()

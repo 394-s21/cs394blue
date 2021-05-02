@@ -10,6 +10,8 @@ import { theme } from '../core/theme'
 
 import { firebase, loginWithEmail } from '../../firebase';
 
+import { CommonActions } from '@react-navigation/native';
+
 export default function LoginScreen({ navigation }) {
   
   const [email, onChangeEmail] = useState("");
@@ -21,6 +23,7 @@ export default function LoginScreen({ navigation }) {
         try {
             const auth = await loginWithEmail(em, pw)
             const user = auth.user
+            
             navigation.navigate('Tabs',{name: user.uid})
         } catch (error) {
             alert(error.message)
@@ -78,7 +81,14 @@ export default function LoginScreen({ navigation }) {
       </Button>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
+        <TouchableOpacity onPress={() => navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'RegisterScreen' }
+        ],
+      })
+    )}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>

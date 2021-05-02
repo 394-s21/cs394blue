@@ -8,6 +8,9 @@ import Register from './signin/Register';
 import { firebase } from './firebase.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import { CommonActions } from '@react-navigation/native';
+
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,6 +18,20 @@ import
 {LoginScreen, RegisterScreen} from './signin/screens';
 
 function LogScreen() {
+
+
+  function logOut(navigation) {
+    firebase.auth().signOut()
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'Auth' }
+        ],
+      })
+    );
+  }
+
   return (
     <Stack.Navigator>
         <Stack.Screen name="Home"
@@ -102,10 +119,7 @@ export default function App() {
     })
   }, [])
 
-  function logOut(navigation) {
-    firebase.auth().signOut()
-    navigation.navigate("Login")
-  }
+  
 
   return (
     <>

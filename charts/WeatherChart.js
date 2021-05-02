@@ -3,6 +3,7 @@ import { Text, View, Dimensions, StyleSheet} from 'react-native'
 import { BarChart } from 'react-native-chart-kit';
 
 export default function WeatherChart(data) {
+  console.log(data)
     if(!data.length) {
       return;
     }

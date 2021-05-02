@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
         try {
             const auth = await loginWithEmail(em, pw)
             const user = auth.user
-            navigation.navigate('Home',{name: user.uid})
+            navigation.navigate('Tabs',{name: user.uid})
         } catch (error) {
             alert(error.message)
             setSignInError(error.message)

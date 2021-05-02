@@ -53,7 +53,7 @@ export default function ProductivityChart(data) {
             },
             {
               // Set max y value in graph by creating invisible data point
-              data: [5],
+              data: [10],
               color: () => 'rgba(0, 0, 0, 0)'
             }
           ]

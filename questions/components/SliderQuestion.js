@@ -15,7 +15,9 @@ function updateField(name, next, rating, questionId, id){
         });
     }
     //add other questions here
+    
     next();
+
 }
 
 export default function SliderQuestion(props) {

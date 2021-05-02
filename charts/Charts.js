@@ -11,7 +11,7 @@ import { firebase } from '../firebase.js';
 export function Charts({navigation, route}) {
   
   // Make input later
-  const name = 'Home';//route.params.name;
+  const name = route.params.name;
   const [entry, setEntry] = useState([]);
 
   useEffect(() => {

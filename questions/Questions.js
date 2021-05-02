@@ -5,6 +5,7 @@ import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
 import {firebase} from '../firebase.js';
 //import { TabRouter } from '@react-navigation/routers';
+import { CommonActions } from '@react-navigation/native';
 
 function logToday(name, today, navigation, id, firstQuestion) {
     if(!id) {
@@ -25,7 +26,7 @@ function logToday(name, today, navigation, id, firstQuestion) {
 
 export function LogStart({navigation,route}) {
     // Will change to input
-    const name = 'Home';//route.params.name;
+    const name = route.params.name;
     const [entries, setEntries] = useState([]);
 
     useEffect(() => {
@@ -127,8 +128,27 @@ export function Wake({navigation, route}) {
             question="What time did you wake up today?"
             options={["5:00 - 6:30 AM", "6:30 - 8:00 AM", "8:00 - 9:30 AM",
                 "9:30 - 11:00 AM", "11:00 - 12:30 PM", "After 12:30 PM"]}
-            next={(str) => navigation.navigate('DayRating',{id, name})}
+            next={(str) => navigation.navigate('Productivity',{id, name})}
             questionId = 'wake'
+            id = {id}
+        />
+    )
+}
+
+
+
+export function Productivity({navigation, route}) {
+    const id = route.params.id;
+    const name = route.params.name;
+    return (
+        <SliderQuestion
+            name={name}
+            question="How productive were you today?"
+            min={0}
+            max={10}
+            step={1}
+            next={(str) => navigation.navigate('DayRating',{id, name})}
+            questionId = 'productivity'
             id = {id}
         />
     )
@@ -144,25 +164,16 @@ export function DayRating({navigation, route}) {
             min={0}
             max={10}
             step={1}
-            next={(str) => navigation.navigate('Productivity',{id, name})}
+            next={(str) => navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [
+                    { name: 'Charts' }
+                  ],
+                }),
+                CommonActions.navigate('Charts')
+              )}
             questionId = 'day_rating'
-            id = {id}
-        />
-    )
-}
-
-export function Productivity({navigation, route}) {
-    const id = route.params.id;
-    const name = route.params.name;
-    return (
-        <SliderQuestion
-            name={name}
-            question="How productive were you today?"
-            min={0}
-            max={5}
-            step={1}
-            next={(str) => navigation.navigate('Charts',{name})}
-            questionId = 'productivity'
             id = {id}
         />
     )

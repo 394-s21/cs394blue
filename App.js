@@ -17,6 +17,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import 
 {LoginScreen, RegisterScreen} from './signin/screens';
 
+
+
+
 function LogScreen() {
 
 
@@ -111,6 +114,9 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
+
+
+
   useEffect(() => {
     Font.loadAsync({
       'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
@@ -123,6 +129,7 @@ export default function App() {
 
   return (
     <>
+
     <NavigationContainer>
 
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -135,6 +142,7 @@ export default function App() {
     </Stack.Navigator>
 
     </NavigationContainer>
+
     </>
   );
 }

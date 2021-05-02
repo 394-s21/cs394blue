@@ -11,6 +11,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import 
+{StartScreen,
+  LoginScreen,
+  RegisterScreen,
+  ResetPasswordScreen,
+  Dashboard,} from './signin/screens';
 
 function LogScreen() {
   return (
@@ -48,10 +54,10 @@ function ChartsScreen() {
 function UserScreen() {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Login"
-          component={Login} />
-        <Stack.Screen name="Register"
-          component={Register} />
+        <Stack.Screen name="LoginScreen"
+          component={LoginScreen} />
+        <Stack.Screen name="RegisterScreen"
+          component={RegisterScreen} />
     </Stack.Navigator>
   );
 }
@@ -76,6 +82,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+
       <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {

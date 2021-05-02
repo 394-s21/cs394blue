@@ -11,6 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import 
+{LoginScreen, RegisterScreen} from './signin/screens';
 
 function LogScreen() {
   return (
@@ -48,11 +50,42 @@ function ChartsScreen() {
 function UserScreen() {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Login"
-          component={Login} />
-        <Stack.Screen name="Register"
-          component={Register} />
+        <Stack.Screen name="LoginScreen"
+          component={LoginScreen} />
+        <Stack.Screen name="RegisterScreen"
+          component={RegisterScreen} />
     </Stack.Navigator>
+  );
+}
+
+function Tabs(){
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Log') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Charts') {
+            iconName = focused ? 'ios-list' : 'ios-list';
+          } /*else if (route.name === 'User') {
+            iconName = focused ? 'ios-list' : 'ios-list';
+          }*/
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#0099cc',
+        inactiveTintColor: 'gray',
+      }}
+      >
+        <Tab.Screen name="Log" component={LogScreen} />
+        <Tab.Screen name="Charts" component={Charts} />
+        {/*<Tab.Screen name="User" component={UserScreen} />*/}
+      </Tab.Navigator>
   );
 }
 
@@ -75,34 +108,20 @@ export default function App() {
   }
 
   return (
+    <>
     <NavigationContainer>
-      <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
 
-          if (route.name === 'Log') {
-            iconName = focused
-              ? 'ios-information-circle'
-              : 'ios-information-circle-outline';
-          } else if (route.name === 'Charts') {
-            iconName = focused ? 'ios-list' : 'ios-list';
-          } else if (route.name === 'User') {
-            iconName = focused ? 'ios-list' : 'ios-list';
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: '#0099cc',
-        inactiveTintColor: 'gray',
-      }}
-      >
-        <Tab.Screen name="Log" component={LogScreen} />
-        <Tab.Screen name="Charts" component={Charts} />
-        <Tab.Screen name="User" component={UserScreen} />
-      </Tab.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+
+    <Stack.Screen name="Auth"
+          component={UserScreen} />
+    <Stack.Screen name="Tabs"
+          component={Tabs} />
+
+    </Stack.Navigator>
+
     </NavigationContainer>
+    </>
   );
 }
 

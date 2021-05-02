@@ -31,7 +31,8 @@ export default function RegisterScreen({ navigation }) {
             const auth = await registerWithEmail(email, password)
             const user = auth.user
             await user.updateProfile({displayName: email})
-            navigation.navigate('Home',{name: user.uid})
+            navigation.navigate('LoginScreen')
+            //navigation.navigate('Tabs',{name: user.uid})
         } catch (error) {
             alert(error.message)
             setRegisterError(error.message)

@@ -15,7 +15,7 @@ function logToday(name, today, navigation, id, firstQuestion) {
             dailyRating: 0,
             date: date,
             exercise: true,
-            wakeupTime: '8:00-9:30',
+            wakeupTime: '8:00 - 9:30 AM',
             weather: 'sunny',
             productivity: 1
         });
@@ -59,19 +59,7 @@ export function LogStart({navigation,route}) {
         if(entry) {
            id = entry["id"];
         }
-    } else {
-        const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
-        var newref = firebase.database().ref(name).push();
-        newref.set({
-            dailyRating: 0,
-            date: date,
-            exercise: true,
-            wakeupTime: '8:00-9:30',
-            weather: 'sunny',
-            productivity: 1
-        });
-        id = newref.key;
-    }
+    } 
 
     // Will be input
     var firstQuestion = 'Weather';

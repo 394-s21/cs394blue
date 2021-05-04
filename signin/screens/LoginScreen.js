@@ -9,7 +9,6 @@ import { theme } from '../core/theme'
 import { firebase, loginWithEmail } from '../../firebase';
 import { CommonActions } from '@react-navigation/native';
 
-
 export default function LoginScreen({ navigation }) {
 
   const [email, onChangeEmail] = useState("");
@@ -52,7 +51,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <Background>
       {/*<BackButton goBack={navigation.goBack} />*/}
-      <Header>Welcome back.</Header>
+      <Header>LifeCapsule</Header>
       <TextInput
         label="Email"
         returnKeyType="next"

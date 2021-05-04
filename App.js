@@ -73,7 +73,8 @@ function UserScreen() {
   );
 }
 
-function Tabs(){
+function Tabs({route, navigation}){
+  const name = !route.params.params.params ? null : route.params.params.params.name;
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -98,7 +99,7 @@ function Tabs(){
       }}
       >
         <Tab.Screen name="Log" component={LogScreen} />
-        <Tab.Screen name="Charts" component={Charts} />
+        <Tab.Screen name="Charts" component={Charts} initialParams={{name}} />
         {/*<Tab.Screen name="User" component={UserScreen} />*/}
       </Tab.Navigator>
   );

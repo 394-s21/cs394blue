@@ -30,8 +30,8 @@ export function Charts({navigation, route}) {
   }
 
   return (
-    //<SafeAreaView>
-      <ScrollView style={styles.scrollview}>
+    <ScrollView style={styles.scrollview}>
+    <SafeAreaView style={styles.container}>
         <Text style={styles.topText}>Charts</Text>
         {DayRatingChart(data)}
         {WeatherChart(data)}
@@ -42,15 +42,16 @@ export function Charts({navigation, route}) {
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>
+    </SafeAreaView>
       </ScrollView>
-    //</SafeAreaView>
   )
 
 }
 
 const styles = StyleSheet.create({
-  scrollview: {
+  container: {
     backgroundColor: '#ffffff',
+    paddingTop: 20,
   },
   topText: {
     fontSize: 24,
@@ -64,10 +65,13 @@ const styles = StyleSheet.create({
     fontFamily: 'roboto-regular'
   },
   button: {
-    borderColor: '#0099cc',
+    borderColor: '#000000',
     alignItems: 'center',
-    borderRadius: 12,
-    borderWidth: 6,
+    borderRadius: 10,
+    borderWidth: 2,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    padding:10,
     backgroundColor: '#ffffff'
   },
 });

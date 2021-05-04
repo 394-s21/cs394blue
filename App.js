@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {LoginScreen, RegisterScreen} from './signin/screens';
+import { log } from 'react-native-reanimated';
 
 function LogScreen() {
 
@@ -34,6 +35,7 @@ function LogScreen() {
           component={LogStart}
           options={({ navigation }) =>
           ({
+            headerLeft: () => null,
             headerRight: () => (
               <Button
                 title="Log Out"
@@ -56,13 +58,24 @@ function LogScreen() {
 
 function ChartsScreen() {
   return (
-    {Charts}
+    <Stack.Navigator>
+        <Stack.Screen name="Charts"
+          component={Charts}
+          options={({ navigation }) =>
+          ({
+            headerLeft: () => null,
+            headerRight: () => (
+              <Button
+                title="Log Out"
+                onPress={() => logOut(navigation)} />)
+          })} />
+    </Stack.Navigator>
   );
 }
 
 function UserScreen() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LoginScreen"
           component={LoginScreen} />
         <Stack.Screen name="RegisterScreen"

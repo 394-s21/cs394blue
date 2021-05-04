@@ -79,7 +79,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#0099cc',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20
+    marginVertical: 5,
+    marginHorizontal: 10,
+    padding: 10,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: '#000000',
+    borderRadius: 10,
   },
   buttonText: {
     fontSize: 18,

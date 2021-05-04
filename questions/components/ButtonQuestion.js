@@ -25,6 +25,10 @@ function updateField(name, next, option, questionId, id) {
             firebase.database().ref(name + '/' + id).update({
                 exercise: false
             });
+        } else {
+            firebase.database().ref(name + '/' + id).update({
+                exercise: true
+            });
         }
     } else if (questionId === 'wake') {
         firebase.database().ref(name + '/' + id).update({

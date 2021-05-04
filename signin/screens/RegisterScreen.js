@@ -11,33 +11,33 @@ import { firebase, registerWithEmail } from '../../firebase';
 export default function RegisterScreen({ navigation }) {
 
   const [email, onChangeEmail] = useState("")
-    const [password, onChangePassword] = useState("")
-    const [secondPassword, onChangeSecondPassword] = useState("")
-    const [registerError, setRegisterError] = useState("")
+  const [password, onChangePassword] = useState("")
+  const [secondPassword, onChangeSecondPassword] = useState("")
+  const [registerError, setRegisterError] = useState("")
 
-    function checkPasswords (em, pw, spw) {
-        if (pw == spw) {
-            handleRegister(em, pw, spw)
-        }
-        else {
-            alert("Passwords do not match")
-        }
+  function checkPasswords(em, pw, spw) {
+    if (pw == spw) {
+      handleRegister(em, pw, spw)
     }
+    else {
+      alert("Passwords do not match")
+    }
+  }
 
-    async function handleRegister (email, password, secondPassword) {
-        setRegisterError(null)
-        try {
-            //console.log(email)
-            const auth = await registerWithEmail(email, password)
-            const user = auth.user
-            await user.updateProfile({displayName: email})
-            navigation.navigate('LoginScreen')
-            //navigation.navigate('Tabs',{name: user.uid})
-        } catch (error) {
-            alert(error.message)
-            setRegisterError(error.message)
-        }
+  async function handleRegister(email, password, secondPassword) {
+    setRegisterError(null)
+    try {
+      //console.log(email)
+      const auth = await registerWithEmail(email, password)
+      const user = auth.user
+      await user.updateProfile({ displayName: email })
+      navigation.navigate('LoginScreen')
+      //navigation.navigate('Tabs',{name: user.uid})
+    } catch (error) {
+      alert(error.message)
+      setRegisterError(error.message)
     }
+  }
 
 
   return (
@@ -61,7 +61,7 @@ export default function RegisterScreen({ navigation }) {
       />
       <Button
         mode="contained"
-        onPress={() => {checkPasswords(email, password, secondPassword)}}
+        onPress={() => { checkPasswords(email, password, secondPassword) }}
         style={{ marginTop: 24 }}
       >
         Sign Up

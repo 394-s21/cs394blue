@@ -5,33 +5,31 @@ import Background from '../components/Background'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
-
 import { theme } from '../core/theme'
-
 import { firebase, loginWithEmail } from '../../firebase';
-
 import { CommonActions } from '@react-navigation/native';
 
-export default function LoginScreen({ navigation }) {
-  
-  const [email, onChangeEmail] = useState("");
-    const [password, onChangePassword] = useState("");
-    const [signInError, setSignInError] = useState("");
 
-    async function handleSubmit (em, pw) {
-        setSignInError(null)
-        try {
-            const auth = await loginWithEmail(em, pw)
-            const user = auth.user
-            
-            navigation.navigate('Tabs', {screen: 'Log', params:{screen:'Home', params:{name:user.uid}}})
-        } catch (error) {
-            alert(error.message)
-            setSignInError(error.message)
-        }
+export default function LoginScreen({ navigation }) {
+
+  const [email, onChangeEmail] = useState("");
+  const [password, onChangePassword] = useState("");
+  const [signInError, setSignInError] = useState("");
+
+  async function handleSubmit(em, pw) {
+    setSignInError(null)
+    try {
+      const auth = await loginWithEmail(em, pw)
+      const user = auth.user
+
+      navigation.navigate('Tabs', { screen: 'Log', params: { screen: 'Home', params: { name: user.uid } } })
+    } catch (error) {
+      alert(error.message)
+      setSignInError(error.message)
     }
-  
-  
+  }
+
+
   /*
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
@@ -76,19 +74,19 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <Button mode="contained" onPress={() => {handleSubmit(email, password)}}>
+      <Button mode="contained" onPress={() => { handleSubmit(email, password) }}>
         Login
       </Button>
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          { name: 'RegisterScreen' }
-        ],
-      })
-    )}>
+          CommonActions.reset({
+            index: 1,
+            routes: [
+              { name: 'RegisterScreen' }
+            ],
+          })
+        )}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>

@@ -14,7 +14,7 @@ import { CommonActions } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {LoginScreen, RegisterScreen} from './signin/screens';
+import { LoginScreen, RegisterScreen } from './signin/screens';
 
 function LogScreen() {
 
@@ -32,48 +32,48 @@ function LogScreen() {
 
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Home"
-          component={LogStart}
-          options={({ navigation }) =>
-          ({
-            headerRight: () => (
-              <Button
-                title="Log Out"
-                onPress={() => logOut(navigation)} />)
-          })}
-        />
-        <Stack.Screen name="Weather"
-          component={Weather} />
-        <Stack.Screen name="Exercise"
-          component={Exercise} />
-        <Stack.Screen name="Wake"
-          component={Wake} />
-        <Stack.Screen name="DayRating"
-          component={DayRating} />
-        <Stack.Screen name="Productivity"
-          component={Productivity} />
+      <Stack.Screen name="Home"
+        component={LogStart}
+        options={({ navigation }) =>
+        ({
+          headerRight: () => (
+            <Button
+              title="Log Out"
+              onPress={() => logOut(navigation)} />)
+        })}
+      />
+      <Stack.Screen name="Weather"
+        component={Weather} />
+      <Stack.Screen name="Exercise"
+        component={Exercise} />
+      <Stack.Screen name="Wake"
+        component={Wake} />
+      <Stack.Screen name="DayRating"
+        component={DayRating} />
+      <Stack.Screen name="Productivity"
+        component={Productivity} />
     </Stack.Navigator>
   );
 }
 
 function ChartsScreen() {
   return (
-    {Charts}
+    { Charts }
   );
 }
 
 function UserScreen() {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="LoginScreen"
-          component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen"
-          component={RegisterScreen} />
+      <Stack.Screen name="LoginScreen"
+        component={LoginScreen} />
+      <Stack.Screen name="RegisterScreen"
+        component={RegisterScreen} />
     </Stack.Navigator>
   );
 }
 
-function Tabs({route, navigation}){
+function Tabs({ route, navigation }) {
   const name = !route.params.params.params ? null : route.params.params.params.name;
   return (
     <Tab.Navigator
@@ -97,11 +97,11 @@ function Tabs({route, navigation}){
         activeTintColor: '#0099cc',
         inactiveTintColor: 'gray',
       }}
-      >
-        <Tab.Screen name="Log" component={LogScreen} />
-        <Tab.Screen name="Charts" component={Charts} initialParams={{name}} />
-        {/*<Tab.Screen name="User" component={UserScreen} />*/}
-      </Tab.Navigator>
+    >
+      <Tab.Screen name="Log" component={LogScreen} />
+      <Tab.Screen name="Charts" component={Charts} initialParams={{ name }} />
+      {/*<Tab.Screen name="User" component={UserScreen} />*/}
+    </Tab.Navigator>
   );
 }
 
@@ -111,8 +111,6 @@ const Stack = createStackNavigator();
 
 export default function App() {
 
-
-
   useEffect(() => {
     Font.loadAsync({
       'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
@@ -121,23 +119,23 @@ export default function App() {
     })
   }, [])
 
-  
+
 
   return (
     <>
 
-    <NavigationContainer>
+      <NavigationContainer>
 
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
 
-    <Stack.Screen name="Auth"
-          component={UserScreen} />
-    <Stack.Screen name="Tabs"
-          component={Tabs} />
+          <Stack.Screen name="Auth"
+            component={UserScreen} />
+          <Stack.Screen name="Tabs"
+            component={Tabs} />
 
-    </Stack.Navigator>
+        </Stack.Navigator>
 
-    </NavigationContainer>
+      </NavigationContainer>
 
     </>
   );

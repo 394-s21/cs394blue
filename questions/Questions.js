@@ -1,15 +1,15 @@
 //import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import ButtonQuestion from './components/ButtonQuestion';
 import SliderQuestion from './components/SliderQuestion';
-import {firebase} from '../firebase.js';
+import { firebase } from '../firebase.js';
 //import { TabRouter } from '@react-navigation/routers';
 import { CommonActions } from '@react-navigation/native';
 
 function logToday(name, today, navigation, id, firstQuestion) {
-    if(!id) {
-        const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();;
+    if (!id) {
+        const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();;
         var newref = firebase.database().ref(name).push();
         newref.set({
             dailyRating: 0,
@@ -21,10 +21,10 @@ function logToday(name, today, navigation, id, firstQuestion) {
         });
         id = newref.key;
     }
-    navigation.navigate(firstQuestion,{id, name});
+    navigation.navigate(firstQuestion, { id, name });
 }
 
-export function LogStart({navigation,route}) {
+export function LogStart({ navigation, route }) {
     // Will change to input
     const name = route.params.name;
     const [entries, setEntries] = useState([]);
@@ -41,9 +41,9 @@ export function LogStart({navigation,route}) {
 
     var data = [];
     for (var id in entries) {
-      var temp = entries[id];
-      temp["id"] = id;
-      data.push(temp);
+        var temp = entries[id];
+        temp["id"] = id;
+        data.push(temp);
     }
 
     const today = new Date();
@@ -54,22 +54,22 @@ export function LogStart({navigation,route}) {
             entryDate.setHours(0, 0, 0, 0);
             today.setHours(0, 0, 0, 0);
             return entryDate.valueOf() === today.valueOf();
-          })
-    
-        if(entry) {
-           id = entry["id"];
+        })
+
+        if (entry) {
+            id = entry["id"];
         }
-    } 
+    }
 
     // Will be input
     var firstQuestion = 'Weather';
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=>logToday(name, today, navigation, id, firstQuestion)} style={styles.button}>
+            <TouchableOpacity onPress={() => logToday(name, today, navigation, id, firstQuestion)} style={styles.button}>
                 <Text style={styles.buttonText}>Log Today</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Charts',{name:name})} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('Charts', { name: name })} style={styles.button}>
                 <Text style={styles.buttonText}>Charts</Text>
             </TouchableOpacity>
         </View>
@@ -77,7 +77,7 @@ export function LogStart({navigation,route}) {
     )
 }
 
-export function Weather({navigation, route}) {
+export function Weather({ navigation, route }) {
     const id = route.params.id;
     const name = route.params.name;
     return (
@@ -85,29 +85,29 @@ export function Weather({navigation, route}) {
             name={name}
             question="How was the weather today?"
             options={["Sunny", "Cloudy", "Rainy", "Snow", "Don't know because I never left the house"]}
-            next={(str) => navigation.navigate('Exercise', {id, name})}
-            questionId = 'weather'
-            id = {id}
+            next={(str) => navigation.navigate('Exercise', { id, name })}
+            questionId='weather'
+            id={id}
         />
     )
 }
 
-export function Exercise({navigation, route}) {
+export function Exercise({ navigation, route }) {
     const id = route.params.id;
     const name = route.params.name;
-    return(
+    return (
         <ButtonQuestion
             name={name}
             question="Did you exercise today?"
             options={["Yes", "No"]}
-            next={(str) => navigation.navigate('Wake',{id, name})}
-            questionId = 'exercise'
-            id = {id}
+            next={(str) => navigation.navigate('Wake', { id, name })}
+            questionId='exercise'
+            id={id}
         />
     )
 }
 
-export function Wake({navigation, route}) {
+export function Wake({ navigation, route }) {
     const id = route.params.id;
     const name = route.params.name;
     return (
@@ -116,16 +116,16 @@ export function Wake({navigation, route}) {
             question="What time did you wake up today?"
             options={["5:00 - 6:30 AM", "6:30 - 8:00 AM", "8:00 - 9:30 AM",
                 "9:30 - 11:00 AM", "11:00 - 12:30 PM", "After 12:30 PM"]}
-            next={(str) => navigation.navigate('Productivity',{id, name})}
-            questionId = 'wake'
-            id = {id}
+            next={(str) => navigation.navigate('Productivity', { id, name })}
+            questionId='wake'
+            id={id}
         />
     )
 }
 
 
 
-export function Productivity({navigation, route}) {
+export function Productivity({ navigation, route }) {
     const id = route.params.id;
     const name = route.params.name;
     return (
@@ -135,14 +135,14 @@ export function Productivity({navigation, route}) {
             min={0}
             max={10}
             step={1}
-            next={(str) => navigation.navigate('DayRating',{id, name})}
-            questionId = 'productivity'
-            id = {id}
+            next={(str) => navigation.navigate('DayRating', { id, name })}
+            questionId='productivity'
+            id={id}
         />
     )
 }
 
-export function DayRating({navigation, route}) {
+export function DayRating({ navigation, route }) {
     const id = route.params.id;
     const name = route.params.name;
     return (
@@ -152,9 +152,9 @@ export function DayRating({navigation, route}) {
             min={0}
             max={10}
             step={1}
-            next={(str) => navigation.navigate('Charts', {name})}
-            questionId = 'day_rating'
-            id = {id}
+            next={(str) => navigation.navigate('Charts', { name })}
+            questionId='day_rating'
+            id={id}
         />
     )
 }

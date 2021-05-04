@@ -1,21 +1,21 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
-import {firebase} from '../../firebase.js';
+import { firebase } from '../../firebase.js';
 
-function updateField(name, next, rating, questionId, id){
-    if (questionId === 'day_rating'){
-        firebase.database().ref(name+'/'+id).update({
+function updateField(name, next, rating, questionId, id) {
+    if (questionId === 'day_rating') {
+        firebase.database().ref(name + '/' + id).update({
             dailyRating: rating
         });
     }
-    else if (questionId === 'productivity'){
-        firebase.database().ref(name+'/'+id).update({
+    else if (questionId === 'productivity') {
+        firebase.database().ref(name + '/' + id).update({
             productivity: rating
         });
     }
     //add other questions here
-    
+
     next();
 
 }
@@ -29,7 +29,7 @@ export default function SliderQuestion(props) {
             <Text style={styles.topText}>{props.question}</Text>
             <Text style={styles.topText}>{sliderValue}</Text>
             <Slider
-                style={{width: 350, height: 40}}
+                style={{ width: 350, height: 40 }}
                 minimumValue={props.min}
                 maximumValue={props.max}
                 step={props.step}
@@ -37,9 +37,9 @@ export default function SliderQuestion(props) {
                 minimumTrackTintColor='rgb(255,255,255)'
                 onValueChange={(value) => {
                     setSliderValue(value)
-                    }}
+                }}
             />
-            <TouchableOpacity style={styles.button} onPress={()=>updateField(props.name, props.next,sliderValue,props.questionId,props.id)}>
+            <TouchableOpacity style={styles.button} onPress={() => updateField(props.name, props.next, sliderValue, props.questionId, props.id)}>
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>

@@ -49,7 +49,7 @@ export default function ExcerciseChart(data) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.buttonText}>Excercise Pattern</Text>
+      <Text style={styles.buttonText}>Excercise Pattern: {count} day(s)</Text>
       <Text style={styles.description}>The percentage of days you excercised in the past week is lit up</Text>
 
       <ProgressChart

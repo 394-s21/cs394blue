@@ -35,10 +35,10 @@ export function Charts({navigation, route}) {
         <Text style={styles.topText}>Charts</Text>
         {DayRatingChart(data)}
         {WeatherChart(data)}
-        {StreakChart(data)}
-        {ProductivityChart(data)}
-        {WakingChart(data)}
         {ExerciseChart(data)}
+        {WakingChart(data)}
+        {ProductivityChart(data)}
+        {StreakChart(data)}
         <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.button}>
                 <Text style={styles.buttonText}>Return to Home</Text>
         </TouchableOpacity>
